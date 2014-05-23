@@ -4,10 +4,11 @@ organization := "com.ljw"
 
 version := "0.0.1"
 
-scalaVersion := "2.10.3"
+scalaVersion := "2.11.0"
 
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2" % "2.3.7" % "test"
+  "org.specs2" %% "specs2" % "2.3.12" % "test",
+  "org.scalatest" %% "scalatest" % "2.1.5" % "test"
 )
 
 scalacOptions in Test ++= Seq("-Yrangepos")

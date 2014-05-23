@@ -49,14 +49,18 @@ class ImperativeQs(pivot: Array[Int] => Int) {
     A(i) = A(j)
     A(j) = tmp
   }
-  private def swap[A, B](a: A, b: B): (B, A) = (b, a)
+  //private def swap[A, B](a: A, b: B): (B, A) = (b, a)
 
   private def partition(A: Array[Int], l: Int, r: Int) : Int = {
+    println("partition " + l + "; " + r)
     val pivotIndex = pivot(A)
-    swap(A(pivotIndex), A(l)) // pivot goes to first slot
-    var i = l + 1
+    if (pivotIndex != l)
+      swap(A, pivotIndex, l) // pivot goes to first slot
+    var i: Int = l + 1
     for (j <- l + 1 until r) {
+      println("for " + j)
       if (A(j) < A(l)) {
+        println("swap " + j + " : " + i)
         swap(A, j , i)  // element at are unknown
         i += 1
       }
@@ -67,15 +71,14 @@ class ImperativeQs(pivot: Array[Int] => Int) {
 
   private def quickSort(A: Array[Int], l: Int, r: Int) : Unit = {
     if (1 < r - l) {
-      cmpCount = r - l - 1
       val pivot = partition(A, l, r)
+      cmpCount += r - l - 1
       quickSort(A, l, pivot)
       quickSort(A, pivot + 1, r)
     }
   }
   def quickSort(A: Array[Int]) {
     quickSort(A, 0, A.size)
-    println("cmp count = " + cmpCount)
   }
 }
 
@@ -88,12 +91,14 @@ object Main extends App {
       }
     }
     }
-    var iVals = integerVals.toArray
 
-    val qs = ImperativeQs.makeIQsZeroPivot
+    def getQuickSortCount(qs: ImperativeQs, a: Array[Int]) : Int = {
+      qs.quickSort(a)
+      qs.cmpCount
+    }
 
-    qs.quickSort(iVals)
+    println("Zero privot Cmps: " + getQuickSortCount(ImperativeQs.makeIQsZeroPivot, integerVals.toArray))
 
-    println("Cmps: " + qs.cmpCount)
+    println("End pivot Cmps: " + getQuickSortCount(ImperativeQs.makeIQsRightPivot, integerVals.toArray))
   }
 }
