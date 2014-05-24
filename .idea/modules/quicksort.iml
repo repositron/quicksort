@@ -4,7 +4,7 @@
     <facet type="scala" name="Scala">
       <configuration>
         <option name="compilerLibraryLevel" value="Project" />
-        <option name="compilerLibraryName" value="SBT:: scala-compiler-bundle:2.11.0" />
+        <option name="compilerLibraryName" value="SBT:: scala-compiler-bundle:2.11.1" />
       </configuration>
     </facet>
   </component>
@@ -41,7 +41,6 @@
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-sbt:test-interface:1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.specs2:classycle:1.4.3" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-compiler:2.11.0" level="project" />
-    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.0" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.0" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.1" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.1" level="project" />
@@ -51,6 +50,7 @@
     <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-effect_2.11:7.0.6" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2_2.11:2.3.12" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scalatest:scalatest_2.11:2.1.5" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.1" level="project" />
   </component>
 </module>
 

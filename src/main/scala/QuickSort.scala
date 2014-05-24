@@ -4,39 +4,20 @@
 
 package org.ljw.qs
 
-
-import scala.collection.immutable.Stream
 import scala.collection.mutable
 import org.ljw.util.Control
-
-class QuickSort(PivotFn: Stream[Int] => Int) {
-
-}
-
-object QuickSort {
-  /*def quickSort(A: Stream, l: Int, r: Int) : Stream =
-  {
-    A
-  }*/
-
-  def quickSort(A: Stream[Int]) : Stream[Int] = A match {
-    case p #:: xs => Stream.concat(quickSort(A.filter(_ < p)), Stream(p), quickSort(A.filter(p <= _)))
-    case x #:: _ => Stream(x)
-    //case _ => Stream.empty
-  }
-}
 
 object ImperativeQs {
   def makeIQsZeroPivot : ImperativeQs = new ImperativeQs((_, x, _) => x)
   def makeIQsRightPivot : ImperativeQs = new ImperativeQs((_, _, y) => y)
-  def getMidIndex(length: Int) : Int = (length - 1)/2
-
+  def calcMidIndex(length: Int) : Int = (length - 1)/2
+  def getMediumIndex(calc: Int => Int, A: Array[Int], left: Int, right: Int) : Int = {
+    val threeVals =  Array((left, A(left)), (right, A(right)), (calc(right- left + 1), A(calc(right - left + 1))))
+    threeVals.sortWith((x, y) => x._2 < y._2)(1)._1 // return the index to the original Array
+  }
 
   def makeIQsMedianPivot : ImperativeQs = new ImperativeQs((A, left, right) => {
-    val middleIndex : Int = (right - left - 1)/2 - 1
-    val medianArray = Array(A(left), A(right), A(middleIndex))
-    medianArray.sorted
-    medianArray(1)
+    getMediumIndex(calcMidIndex, A, left, right)
   })
 }
 
@@ -52,11 +33,12 @@ class ImperativeQs(pivot: (Array[Int], Int, Int) => Int) {
   private def partition(A: Array[Int], left: Int, right: Int) : Int = {
     // partition over [left, right]
     val pivotIndex = pivot(A, left ,right)
+    val p = A(pivotIndex)
     if (pivotIndex != left)
       swap(A, pivotIndex, left) // pivot goes to first slot
     var i: Int = left + 1
     for (j <- left + 1 to right) {
-      if (A(j) < A(left)) {
+      if (A(j) < p) {
         swap(A, j , i)  // elements after i + 1 are unknown
         i += 1
       }
@@ -97,5 +79,7 @@ object Main extends App {
     println("Zero privot Cmps: " + getQuickSortCount(ImperativeQs.makeIQsZeroPivot, integerVals.toArray))
 
     println("End pivot Cmps: " + getQuickSortCount(ImperativeQs.makeIQsRightPivot, integerVals.toArray))
+
+    println("median of 3 pivot Cmps: " + getQuickSortCount(ImperativeQs.makeIQsMedianPivot, integerVals.toArray))
   }
 }
