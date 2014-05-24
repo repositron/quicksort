@@ -30,7 +30,7 @@ class QuickSortSpec extends Specification {
   }
 
   "simple" in {
-    val qs = new ImperativeQs(_ => 0)
+    val qs = ImperativeQs.makeIQsZeroPivot
     var a = Array(2, 1)
     qs.quickSort(a)
     a mustEqual Array(1, 2)
@@ -58,12 +58,20 @@ class QuickSortSpec extends Specification {
     reverse mustEqual (1 to 4).toArray
   }
 
+  "reverse order qs 4 far right pivot" in {
+    val qs = ImperativeQs.makeIQsRightPivot
+    var reverse = Array.range(4, 0, -1)
+    qs.quickSort(reverse)
+    reverse mustEqual (1 to 4).toArray
+  }
+
   val testCaseVals = Array(3, 9, 8, 4, 6, 10, 2, 5, 7, 1)
 
   "forum test case zero pivot" in {
     var a = testCaseVals
     val qs = ImperativeQs.makeIQsZeroPivot
     qs.quickSort(a)
+    a mustEqual (1 to 10).toArray
     qs.cmpCount mustEqual 25
   }
 
@@ -71,6 +79,23 @@ class QuickSortSpec extends Specification {
     var a = testCaseVals
     val qs = ImperativeQs.makeIQsRightPivot
     qs.quickSort(a)
+    a mustEqual (1 to 10).toArray
     qs.cmpCount mustEqual 29
+  }
+
+  "mid of 4 is 1" in {
+    ImperativeQs.getMidIndex(4) mustEqual 1
+  }
+
+  "mid of 3 is 1" in {
+    ImperativeQs.getMidIndex(3) mustEqual 1
+  }
+
+  "mid of 9 is 4" in {
+    ImperativeQs.getMidIndex(9) mustEqual 4
+  }
+
+  "mid of 10 is 4" in {
+    ImperativeQs.getMidIndex(10) mustEqual 4
   }
 }
