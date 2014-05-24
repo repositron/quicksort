@@ -11,13 +11,14 @@ object ImperativeQs {
   def makeIQsZeroPivot : ImperativeQs = new ImperativeQs((_, x, _) => x)
   def makeIQsRightPivot : ImperativeQs = new ImperativeQs((_, _, y) => y)
   def calcMidIndex(length: Int) : Int = (length - 1)/2
-  def getMediumIndex(calc: Int => Int, A: Array[Int], left: Int, right: Int) : Int = {
-    val threeVals =  Array((left, A(left)), (right, A(right)), (calc(right- left + 1), A(calc(right - left + 1))))
+  def getMediumIndex(A: Array[Int], left: Int, right: Int) : Int = {
+    val midIndex : Int =  (right + left)/2
+    val threeVals =  Array((left, A(left)), (right, A(right)), (midIndex, A(midIndex)))
     threeVals.sortWith((x, y) => x._2 < y._2)(1)._1 // return the index to the original Array
   }
 
   def makeIQsMedianPivot : ImperativeQs = new ImperativeQs((A, left, right) => {
-    getMediumIndex(calcMidIndex, A, left, right)
+    getMediumIndex(A, left, right)
   })
 }
 

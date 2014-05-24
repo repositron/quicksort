@@ -103,48 +103,32 @@ class QuickSortSpec extends Specification {
     qs.cmpCount mustEqual 29
   }
 
-  "mid of 4 is 1" in {
-    ImperativeQs.calcMidIndex(4) mustEqual 1
-  }
-
-  "mid of 3 is 1" in {
-    ImperativeQs.calcMidIndex(3) mustEqual 1
-  }
-
-  "mid of 9 is 4" in {
-    ImperativeQs.calcMidIndex(9) mustEqual 4
-  }
-
-  "mid of 10 is 4" in {
-    ImperativeQs.calcMidIndex(10) mustEqual 4
-  }
-
   "medium index 1" in {
-    ImperativeQs.getMediumIndex(ImperativeQs.calcMidIndex, Array(1, 5, 10), 0, 2) mustEqual 1
+    ImperativeQs.getMediumIndex(Array(1, 5, 10), 0, 2) mustEqual 1
   }
 
   "medium index 2" in {
-    ImperativeQs.getMediumIndex(ImperativeQs.calcMidIndex, Array(1, 5,  6, 10), 0, 3) mustEqual 1
+    ImperativeQs.getMediumIndex(Array(1, 5,  6, 10), 0, 3) mustEqual 1
   }
 
   "medium index last" in {
-    ImperativeQs.getMediumIndex(ImperativeQs.calcMidIndex, Array(1, 10,  6, 4), 0, 3) mustEqual 3
+    ImperativeQs.getMediumIndex(Array(1, 10,  6, 4), 0, 3) mustEqual 3
   }
 
   "medium index first" in {
-    ImperativeQs.getMediumIndex(ImperativeQs.calcMidIndex, Array(4, 10,  6, 1), 0, 3) mustEqual 0
+    ImperativeQs.getMediumIndex(Array(4, 10,  6, 1), 0, 3) mustEqual 0
   }
 
   "medium from example" in {
-    ImperativeQs.getMediumIndex(ImperativeQs.calcMidIndex, Array(8, 2, 4, 5, 7, 1), 0, 5) mustEqual 2
+    ImperativeQs.getMediumIndex(Array(8, 2, 4, 5, 7, 1), 0, 5) mustEqual 2
   }
 
   "medium from example partial 4 @ index 2 is median" in {
-    ImperativeQs.getMediumIndex(ImperativeQs.calcMidIndex, Array(8, 2, 4, 5, 7, 1), 2, 5) mustEqual 2
+    ImperativeQs.getMediumIndex(Array(8, 2, 4, 5, 7, 1), 2, 5) mustEqual 2
   }
 
   "medium from example partial 5 @ index 3 is median" in {
-    ImperativeQs.getMediumIndex(ImperativeQs.calcMidIndex, Array(8, 2, 4, 5, 7, 1), 3, 5) mustEqual 3
+    ImperativeQs.getMediumIndex(Array(8, 2, 4, 5, 7, 1), 3, 5) mustEqual 3
   }
 
   "forum test case medium of three" in new data {
